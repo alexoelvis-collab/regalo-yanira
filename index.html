@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0713">
+<title>Player 2: Yanira ❤️</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --pink: #ff65cf;
+  --purple: #a875ff;
+  --bg: #0b0713;
+  --panel: rgba(25, 17, 40, .92);
+  --muted: #bcb1d0;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; min-height: 100vh; color: #fff;
+  background: radial-gradient(ellipse at 50% 0%, #35134d 0%, #120b20 42%, var(--bg) 78%);
+  font-family: Inter, sans-serif;
+  overflow-x: hidden;
+}
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background-image: radial-gradient(#fff 1px, transparent 1px);
+  background-size: 43px 43px; opacity: .18;
+}
+main { width: min(760px, 91%); margin: auto; padding: 32px 0 55px; }
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin-bottom: 38px; font: 10px Orbitron, sans-serif;
+  letter-spacing: 1px; color: #d5c1f5;
+}
+.online { color: #83ffbd; }
+.screen { display: none; animation: enter .4s ease both; }
+.screen.active { display: block; }
+@keyframes enter {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  50% { box-shadow: 0 0 35px #ff65cf55; }
+}
+@keyframes float {
+  50% { transform: translateY(-6px); }
+}
+h1, h2, h3, .tech { font-family: Orbitron, sans-serif; }
+h1 { font-size: clamp(32px, 8vw, 58px); line-height: 1.22; margin: 15px 0; }
+h2 { font-size: clamp(19px, 4vw, 27px); line-height: 1.4; }
+h3 { font-size: 16px; }
+p { line-height: 1.8; color: #d5cbe4; }
+.tech { color: var(--pink); font-size: 10px; letter-spacing: 2.5px; line-height: 1.8; }
+.glow { text-shadow: 0 0 20px #ff65cf66, 0 0 45px #a875ff35; }
+.pink { color: var(--pink); }
+.purple { color: #c5a5ff; }
+.tag {
+  display: inline-block; padding: 7px 11px; border-radius: 30px;
+  border: 1px solid #a875ff66; background: #a875ff12;
+  font-size: 11px; color: #e5d2ff;
+}
+.panel {
+  border: 1px solid #a875ff55; border-radius: 18px; padding: 22px;
+  background: var(--panel); margin: 18px 0;
+  box-shadow: 0 0 30px #a875ff0b;
+}
+.hero { text-align: center; padding: 35px 0 25px; }
+.hero .panel { text-align: left; animation: pulse 3s infinite; }
+.symbol {
+  display: inline-flex; width: 66px; height: 66px; border-radius: 19px;
+  align-items: center; justify-content: center; margin-bottom: 20px;
+  font-size: 30px; color: var(--pink);
+  border: 1px solid #ff65cf77; background: #ff65cf10;
+  box-shadow: 0 0 28px #ff65cf22; animation: float 3s ease-in-out infinite;
+}
+button {
+  font: 600 12px Inter, sans-serif; letter-spacing: .4px;
+  color: white; cursor: pointer; padding: 14px 17px;
+  border: 1px solid #ff85dc; border-radius: 10px;
+  background: linear-gradient(110deg, #863fe0, #d843aa);
+  transition: transform .2s, filter .2s;
+}
+button:hover { transform: translateY(-2px); filter: brightness(1.13); }
+button:focus-visible { outline: 2px solid white; outline-offset: 3px; }
+.secondary { background: #20162e; border-color: #a875ff66; }
+.actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 20px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+.tile {
+  border: 1px solid #a875ff40; background: #171021;
+  border-radius: 14px; padding: 17px; min-width: 0;
+}
+.tile .number { color: #b999ff; font: 10px Orbitron, sans-serif; letter-spacing: 1.5px; }
+.tile p { font-size: 13px; }
+.tile button { width: 100%; }
+.message {
+  display: none; margin-top: 13px; padding: 12px;
+  border-radius: 9px; background: #ff65cf10;
+  border: 1px solid #ff65cf45; color: #ffe0f5; font-size: 13px;
+}
+.message.show { display: block; animation: enter .3s ease; }
+.progress-wrap { margin: 22px 0; }
+.progress-label { display: flex; justify-content: space-between; gap: 10px; font-size: 11px; color: var(--muted); margin-bottom: 8px; }
+.track { height: 7px; border-radius: 10px; background: #30213e; overflow: hidden; }
+.fill { height: 100%; width: 0; border-radius: 10px; background: linear-gradient(90deg, var(--purple), var(--pink)); transition: width .4s; }
+.letter { border-left: 2px solid var(--pink); padding-left: 18px; }
+.letter p { margin: 0 0 16px; }
+.center { text-align: center; }
+footer { margin-top: 42px; text-align: center; color: #8f819f; font: 9px Orbitron, sans-serif; letter-spacing: 1.5px; line-height: 2; }
+@media(max-width:450px) {
+  main { padding-top: 22px; }
+  .topbar { font-size: 8px; }
+  .panel { padding: 18px; }
+  .hero { padding-top: 18px; }
+  .grid { grid-template-columns: 1fr; }
+}
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after { animation: none !important; scroll-behavior: auto !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+<main>
+<header class="topbar">
+  <span>YANIRA.EXE</span>
+  <span class="online">● PLAYER 2 ONLINE</span>
+</header>
+
+<section class="screen active" id="home">
+  <div class="hero">
+    <div class="symbol">♡</div>
+    <p class="tech">A SPECIAL TWO-PLAYER STORY</p>
+    <h1 class="glow">PLAYER 1:<br><span class="pink">Elvis</span><br>PLAYER 2:<br><span class="purple">YANIRA</span></h1>
+    <p>Dos meses compartiendo esta aventura.<br>Y todavía quedan muchos niveles por delante.</p>
+    <div class="panel">
+      <span class="tag">♥ MISIÓN ESPECIAL</span>
+      <h2>Una partida diferente</h2>
+      <p>He preparado un pequeño regalo para ti mi amor. No es un juego cualquiera: es una forma de recordarte lo especial que eres para mí.</p>
+      <button onclick="go('missions')">▶ INICIAR PARTIDA</button>
+    </div>
+    <p class="tech">NO SAVE FILE NEEDED · JUST US TWO</p>
+  </div>
+</section>
+
+<section class="screen" id="missions">
+  <p class="tech">MISSION SELECT / 01</p>
+  <h1 class="glow">Nuestro mundo<span class="pink">.</span></h1>
+  <p>Elige una misión para descubrir lo que he preparado para ti.</p>
+  <div class="progress-wrap">
+    <div class="progress-label"><span>PROGRESO DE LA PARTIDA</span><span id="progressText">0 / 6</span></div>
+    <div class="track"><div class="fill" id="progressFill"></div></div>
+  </div>
+  <div class="grid">
+    <div class="tile">
+      <span class="number">LEVEL 01</span>
+      <h3>La aventura</h3>
+      <p>Una pequeña historia sobre nosotros.</p>
+      <button onclick="go('story')">Entrar al nivel</button>
+    </div>
+    <div class="tile">
+      <span class="number">LEVEL 02</span>
+      <h3>Logros desbloqueables</h3>
+      <p>Cuatro mensajes que quiero que leas.</p>
+      <button onclick="go('achievements')">Ver logros</button>
+    </div>
+    <div class="tile">
+      <span class="number">LEVEL 03</span>
+      <h3>Mensaje privado</h3>
+      <p>Unas palabras para ti, mi niña.</p>
+      <button onclick="go('letter')">Abrir mensaje</button>
+    </div>
+    <div class="tile">
+      <span class="number">FINAL LEVEL</span>
+      <h3>La siguiente misión</h3>
+      <p>Una sorpresa para nuestro próximo encuentro.</p>
+      <button onclick="go('final')">Continuar →</button>
+    </div>
+  </div>
+  <div class="actions"><button class="secondary" onclick="go('home')">← Menú principal</button></div>
+</section>
+
+<section class="screen" id="story">
+  <p class="tech">LEVEL 01 / OUR STORY</p>
+  <h1 class="glow">Nuestra aventura<span class="pink">.</span></h1>
+  <div class="panel">
+    <span class="tag">ACHIEVEMENT UNLOCKED ♥</span>
+    <h2>Capítulo 1: Encontrarte</h2>
+    <p>De todas las cosas que pueden pasar en la vida, me gusta que nuestras historias se hayan cruzado.</p>
+    <p>Estos dos meses son solo el comienzo. Me gusta tener a alguien con quien compartir mis días, reírme por tonterías y pensar en todos los momentos que todavía nos quedan por vivir.</p>
+  </div>
+  <div class="panel">
+    <span class="tech">NEXT OBJECTIVE</span>
+    <h2>Volver a vernos</h2>
+    <p>La distancia a veces se hace larga, pero también hace que espere con ganas cada abrazo y cada momento a tu lado.</p>
+  </div>
+  <div class="actions">
+    <button onclick="complete('story');go('achievements')">Siguiente nivel →</button>
+    <button class="secondary" onclick="go('missions')">← Misiones</button>
+  </div>
+</section>
+
+<section class="screen" id="achievements">
+  <p class="tech">LEVEL 02 / ACHIEVEMENTS</p>
+  <h1 class="glow">Logros<span class="pink">.</span></h1>
+  <p>Hay cosas de ti que me gustan mucho. Pulsa cada tarjeta para desbloquearlas.</p>
+  <div class="grid">
+    <div class="tile">
+      <span class="number">ACHIEVEMENT 01</span><h3>♥ Tu sonrisa</h3>
+      <button onclick="reveal('m1','a1')">Desbloquear</button>
+      <div class="message" id="m1">Me encanta saber que puedo hacerte sonreír y que tengamos nuestros momentos felices.</div>
+    </div>
+    <div class="tile">
+      <span class="number">ACHIEVEMENT 02</span><h3>★ Tu forma de ser</h3>
+      <button onclick="reveal('m2','a2')">Desbloquear</button>
+      <div class="message" id="m2">Me gustas siendo tú, con tu forma de hablar, tus ocurrencias y esos pequeños detalles que te hacen especial.</div>
+    </div>
+    <div class="tile">
+      <span class="number">ACHIEVEMENT 03</span><h3>∞ Nuestro equipo</h3>
+      <button onclick="reveal('m3','a3')">Desbloquear</button>
+      <div class="message" id="m3">No siempre podemos estar cerca, pero me gusta que sigamos creando recuerdos y compartiendo momentos.</div>
+    </div>
+    <div class="tile">
+      <span class="number">ACHIEVEMENT 04</span><h3>♡ Próximo encuentro</h3>
+      <button onclick="reveal('m4','a4')">Desbloquear</button>
+      <div class="message" id="m4">Tengo ganas de volver a verte, abrazarte y disfrutar de esos ratitos juntos que se pasan demasiado rápido.</div>
+    </div>
+  </div>
+  <div class="actions">
+    <button onclick="complete('achievements');go('letter')">Siguiente nivel →</button>
+    <button class="secondary" onclick="go('missions')">← Misiones</button>
+  </div>
+</section>
+
+<section class="screen" id="letter">
+  <p class="tech">PRIVATE MESSAGE / ONLY FOR YANIRA</p>
+  <h1 class="glow">Para ti<span class="pink">, Yanira.</span></h1>
+  <div class="panel">
+    <div class="letter">
+      <p>Felices dos meses, mi niña. ❤️</p>
+      <p>Me habría encantado poder darte este regalo en persona, abrazarte y pasar este día contigo. Como ahora nos toca estar a distancia, quería hacer algo diferente que pudieras guardar y volver a abrir cuando te apetezca.</p>
+      <p>Quiero que sepas que me alegra tenerte en mi vida. Me gustan nuestros momentos, nuestras conversaciones y saber que, aunque no siempre podamos estar cerca, podemos seguir compartiendo cosas bonitas.</p>
+      <p>No te voy a prometer que todo será perfecto, pero sí quiero seguir conociéndote, cuidando lo nuestro y creando recuerdos contigo, paso a paso.</p>
+      <p>Gracias por estos dos meses, por ser tú y por formar parte de mi historia. Ojalá nos queden muchísimos más niveles por jugar juntos.</p>
+      <p class="pink">Feliz segundo mes, Mi amor. Me alegra que seas tú. ❤️</p>
+      <p>Con cariño,<br>tu Player 1. 🎮</p>
+    </div>
+  </div>
+  <div class="actions">
+    <button onclick="complete('letter');go('final')">Desbloquear sorpresa final ♥</button>
+    <button class="secondary" onclick="go('missions')">← Misiones</button>
+  </div>
+</section>
+
+<section class="screen" id="final">
+  <div class="center">
+    <div class="symbol">♥</div>
+    <p class="tech">MISSION COMPLETE</p>
+    <h1 class="glow">CONTINUARÁ<span class="pink">...</span></h1>
+  </div>
+  <div class="panel">
+    <span class="tag">NEW OBJECTIVE UNLOCKED</span>
+    <h2>La siguiente misión: volver a vernos</h2>
+    <p>Este pequeño juego termina aquí, pero nuestra historia sigue.</p>
+    <p>Hoy quería regalarte algo que pudieras abrir incluso estando lejos. Y cuando vuelva a verte, espero poder darte también ese abrazo que tengo pendiente contigo.</p>
+    <p>No hace falta que todo sea perfecto. A mí me basta con seguir compartiendo momentos contigo y ver adónde nos lleva esta aventura.</p>
+    <h2 class="pink">Feliz segundo mes, amor mio. ❤️</h2>
+  </div>
+  <div class="center">
+    <button onclick="go('missions')">↻ Volver a las misiones</button>
+    <button class="secondary" onclick="go('home')">Volver al inicio</button>
+  </div>
+</section>
+
+<footer>
+  MADE WITH ♥ FOR YANIRA<br>
+  PLAYER 1 + PLAYER 2 · LEVEL 02
+</footer>
+</main>
+
+<script>
+const completed = new Set();
+
+function go(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById(id);
+  if (target) target.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function complete(id) {
+  completed.add(id);
+  updateProgress();
+}
+
+function reveal(messageId, achievementId) {
+  const message = document.getElementById(messageId);
+  message.classList.toggle('show');
+  if (message.classList.contains('show')) {
+    complete(achievementId);
+  }
+}
+
+function updateProgress() {
+  const count = completed.size;
+  document.getElementById('progressText').textContent = count + ' / 7';
+  document.getElementById('progressFill').style.width = (count / 6 * 100) + '%';
+}
+</script>
+</body>
+</html>
